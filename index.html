@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Flores Amarillas 🌻</title>
+    <title>Flores Amarillas para la Vizcacha 🌻</title>
     <style>
         :root {
             --amarillo-sol: #ffd700;
@@ -27,7 +27,7 @@
             touch-action: none;
         }
 
-        /* Contenedor de estrellas */
+        /* Fondo de estrellas y cometas */
         .stars-container {
             position: fixed;
             top: 0;
@@ -50,7 +50,24 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* Interfaz principal */
+        /* Lluvia de estrellas fugaces (cometas) */
+        .cometa {
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8));
+            transform: rotate(-35deg);
+            animation: shoot 4s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% { transform: translateY(-50px) translateX(0) rotate(-35deg); opacity: 1; }
+            30% { transform: translateY(100vh) translateX(100vw) rotate(-35deg); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Contenedor Principal */
         .content {
             position: relative;
             z-index: 10;
@@ -60,29 +77,6 @@
             align-items: center;
             height: 100vh;
             padding: 20px;
-        }
-
-        .vibrant-text h1 {
-            color: var(--amarillo-sol);
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px var(--brillo-oro), 0 0 20px var(--brillo-oro);
-            animation: pulse-glow 2s infinite alternate;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .vibrant-text p {
-            color: #fff9c4;
-            font-size: 1.3rem;
-            font-weight: 600;
-            line-height: 1.5;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes pulse-glow {
-            from { text-shadow: 0 0 10px var(--brillo-oro), 0 0 20px var(--brillo-oro); }
-            to { text-shadow: 0 0 20px var(--brillo-oro), 0 0 35px #ffee58, 0 0 15px #fff; }
         }
 
         #start-btn {
@@ -97,9 +91,6 @@
             box-shadow: 0 0 25px rgba(253, 216, 53, 0.7);
             z-index: 100;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         #start-btn:active {
@@ -107,27 +98,46 @@
             box-shadow: 0 0 15px rgba(253, 216, 53, 0.4);
         }
 
-        /* Ilustración de Girasoles en movimiento */
-        .girasol-svg {
-            position: absolute;
-            z-index: 5;
-            pointer-events: none;
-            filter: drop-shadow(0 0 10px var(--brillo-oro));
-            animation: galaxy-float 7s linear forwards;
+        /* Ramo de Flores SVG */
+        .ramo-container {
+            width: 280px;
+            height: auto;
+            max-height: 45vh;
+            margin-bottom: 20px;
+            animation: float-soft 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
         }
 
-        @keyframes galaxy-float {
-            0% {
-                transform: translate(0, 110vh) rotate(0deg) scale(0.4);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(calc(var(--side-move) * 2), -20vh) rotate(360deg) scale(1.3);
-                opacity: 0;
-            }
+        @keyframes float-soft {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-10px); }
+        }
+
+        /* Texto y Dedicatoria */
+        .vibrant-text h1 {
+            color: var(--amarillo-sol);
+            font-size: 2rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--brillo-oro), 0 0 20px var(--brillo-oro);
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .vibrant-text p {
+            color: #fff9c4;
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .vibrant-text .dedicatoria {
+            margin-top: 12px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffee58;
+            letter-spacing: 0.5px;
         }
 
         .hidden {
@@ -140,26 +150,73 @@
     <div class="stars-container" id="starsBox"></div>
 
     <div id="ui" class="content">
-        <button id="start-btn">
-            <svg width="24" height="24" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="15" fill="#5D4037"/>
-                <g fill="#FFD700">
-                    <ellipse cx="50" cy="15" rx="6" ry="15"/>
-                    <ellipse cx="50" cy="85" rx="6" ry="15"/>
-                    <ellipse cx="15" cy="50" rx="15" ry="6"/>
-                    <ellipse cx="85" cy="50" rx="15" ry="6"/>
-                </g>
-            </svg>
-            Abrir Regalo Galáctico
-        </button>
+        <button id="start-btn">🌻 Abrir Regalo Galáctico 🌻</button>
         
-        <div id="mensaje" class="vibrant-text hidden">
-            <h1>¡Feliz día de las flores amarillas!</h1>
-            <p>Amarillas como el sol,<br>ya que tú iluminas mi día. ✨</p>
+        <div id="regalo" class="hidden">
+            <!-- Ilustración Vectorial del Ramo de Girasoles -->
+            <svg class="ramo-container" viewBox="0 0 300 400">
+                <!-- Tallos y Hojas -->
+                <g stroke="#4CAF50" stroke-width="6" stroke-linecap="round" fill="none">
+                    <path d="M150 380 Q140 280 150 180" />
+                    <path d="M150 380 Q110 270 100 130" />
+                    <path d="M150 380 Q190 270 200 130" />
+                    <path d="M150 380 Q100 300 70 220" />
+                    <path d="M150 380 Q200 300 230 220" />
+                </g>
+
+                <!-- Hojas Verdes -->
+                <g fill="#43A047" stroke="#2E7D32" stroke-width="1.5">
+                    <path d="M140 320 Q90 300 100 340 Q130 350 140 320 Z"/>
+                    <path d="M160 320 Q210 300 200 340 Q170 350 160 320 Z"/>
+                    <path d="M120 250 Q70 230 80 270 Q110 280 120 250 Z"/>
+                    <path d="M180 250 Q230 230 220 270 Q190 280 180 250 Z"/>
+                    <path d="M130 190 Q80 170 90 210 Q120 220 130 190 Z"/>
+                    <path d="M170 190 Q220 170 210 210 Q180 220 170 190 Z"/>
+                </g>
+
+                <!-- Definición de la flor del Girasol -->
+                <defs>
+                    <g id="girasol">
+                        <g fill="#FFD700" stroke="#FFA000" stroke-width="1">
+                            <ellipse cx="0" cy="-35" rx="9" ry="25"/>
+                            <ellipse cx="0" cy="35" rx="9" ry="25"/>
+                            <ellipse cx="-35" cy="0" rx="25" ry="9"/>
+                            <ellipse cx="35" cy="0" rx="25" ry="9"/>
+                            <ellipse cx="-25" cy="-25" rx="9" ry="25" transform="rotate(-45 -25 -25)"/>
+                            <ellipse cx="25" cy="25" rx="9" ry="25" transform="rotate(-45 25 25)"/>
+                            <ellipse cx="25" cy="-25" rx="9" ry="25" transform="rotate(45 25 -25)"/>
+                            <ellipse cx="-25" cy="25" rx="9" ry="25" transform="rotate(45 -25 25)"/>
+                        </g>
+                        <!-- Capa interna de pétalos -->
+                        <g fill="#FFC107">
+                            <circle cx="0" cy="0" r="28"/>
+                        </g>
+                        <!-- Centro oscuro -->
+                        <circle cx="0" cy="0" r="22" fill="#3E2723" stroke="#5D4037" stroke-width="2"/>
+                        <circle cx="0" cy="0" r="18" fill="#271510"/>
+                        <!-- Textura del centro -->
+                        <circle cx="0" cy="0" r="12" fill="none" stroke="#8D6E63" stroke-width="2" stroke-dasharray="3,3"/>
+                    </g>
+                </defs>
+
+                <!-- Posicionamiento de las 5 Flores -->
+                <use href="#girasol" x="150" y="100" transform="scale(1.1)" />
+                <use href="#girasol" x="80" y="150" transform="scale(0.9)" />
+                <use href="#girasol" x="220" y="150" transform="scale(0.9)" />
+                <use href="#girasol" x="110" y="220" transform="scale(0.85)" />
+                <use href="#girasol" x="190" y="220" transform="scale(0.85)" />
+            </svg>
+
+            <!-- Mensaje y Dedicatoria -->
+            <div class="vibrant-text">
+                <h1>¡Feliz día de las flores amarillas! ✨</h1>
+                <p>Amarillas como el sol,<br>ya que tú iluminas mi día.</p>
+                <p class="dedicatoria">Para mi vizcacha. 🌻💛</p>
+            </div>
         </div>
     </div>
 
-    <!-- Canción de fondo -->
+    <!-- Audio de fondo -->
     <audio id="musicaFlor" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
@@ -167,12 +224,12 @@
     <script>
         const starsBox = document.getElementById('starsBox');
         const btn = document.getElementById('start-btn');
-        const mensaje = document.getElementById('mensaje');
+        const regalo = document.getElementById('regalo');
         const audio = document.getElementById('musicaFlor');
 
-        // Generar estrellas de fondo
+        // Crear fondo de estrellas
         function initStars() {
-            for (let i = 0; i < 90; i++) {
+            for (let i = 0; i < 80; i++) {
                 const estrella = document.createElement('div');
                 estrella.className = 'estrella';
                 const tamaño = (Math.random() * 3 + 1) + 'px';
@@ -183,54 +240,27 @@
                 estrella.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
                 starsBox.appendChild(estrella);
             }
+
+            // Crear estrellas fugaces
+            for (let i = 0; i < 4; i++) {
+                const cometa = document.createElement('div');
+                cometa.className = 'cometa';
+                cometa.style.left = (Math.random() * 80) + 'vw';
+                cometa.style.top = (Math.random() * 40) + 'vh';
+                cometa.style.animationDelay = (Math.random() * 4) + 's';
+                starsBox.appendChild(cometa);
+            }
         }
 
         initStars();
 
         btn.addEventListener('click', () => {
             btn.classList.add('hidden');
-            mensaje.classList.remove('hidden');
+            regalo.classList.remove('hidden');
 
-            // Reproducción para iOS Safari
-            audio.play().catch(error => console.log("Audio de iPhone bloqueado:", error));
-
-            // Lluvia constante de girasoles
-            setInterval(spawnSunflower, 300);
+            // Audio optimizado para reproducción en iPhone
+            audio.play().catch(error => console.log("Audio de iPhone:", error));
         });
-
-        // Crear vector visual del Girasol
-        function spawnSunflower() {
-            const container = document.createElement('div');
-            container.className = 'girasol-svg';
-            
-            // SVG estilizado con pétalos y centro oscuro
-            const size = Math.random() * 30 + 40;
-            container.innerHTML = `
-                <svg width="${size}" height="${size}" viewBox="0 0 100 100">
-                    <g fill="#FFD700">
-                        <ellipse cx="50" cy="12" rx="7" ry="18"/>
-                        <ellipse cx="50" cy="88" rx="7" ry="18"/>
-                        <ellipse cx="12" cy="50" rx="18" ry="7"/>
-                        <ellipse cx="88" cy="50" rx="18" ry="7"/>
-                        <ellipse cx="23" cy="23" rx="8" ry="18" transform="rotate(-45 23 23)"/>
-                        <ellipse cx="77" cy="77" rx="8" ry="18" transform="rotate(-45 77 77)"/>
-                        <ellipse cx="77" cy="23" rx="8" ry="18" transform="rotate(45 77 23)"/>
-                        <ellipse cx="23" cy="77" rx="8" ry="18" transform="rotate(45 23 77)"/>
-                    </g>
-                    <circle cx="50" cy="50" r="22" fill="#3E2723"/>
-                    <circle cx="50" cy="50" r="18" fill="#4E342E"/>
-                </svg>
-            `;
-
-            container.style.left = Math.random() * 90 + 'vw';
-            container.style.setProperty('--side-move', (Math.random() * 120 - 60) + 'px');
-
-            document.body.appendChild(container);
-
-            setTimeout(() => {
-                container.remove();
-            }, 7000);
-        }
     </script>
 </body>
 </html>
